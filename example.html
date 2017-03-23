@@ -25,15 +25,15 @@
 	<div class="div2"></div>
 </div>
 
-
 <script src="csxiaoyao.js"></script>
 <script src="csxiaoyao-url.js"></script>
 <script src="csxiaoyao-cookie.js"></script>
-<script src="csxiaoyao-client.js"></script>
 <script src="csxiaoyao-response.js"></script>
 <script src="csxiaoyao-formatDate.js"></script>
-<script src="csxiaoyao-scrolltop.js"></script>
-<script src="csxiaoyao-keyevent.js"></script>
+<script src="csxiaoyao-client.js"></script>
+<script src="csxiaoyao-scroll.js"></script>
+<script src="csxiaoyao-key.js"></script>
+<script src="csxiaoyao-element.js"></script>
 
 <script>
 
@@ -70,23 +70,6 @@ console.log($$.setCookie("name","csxiaoyao",3).setCookie("age",25,3).getCookie("
 console.log($$.clearCookie("age").getCookie("age"));//null
 
 /**
- * client
- */
-console.log($$.language);//zh-cn
-console.log($$.isMobile);//false
-console.log($$.isMobileOld);//false
-//获取屏幕可视区域的宽高
-console.log($$.client());//Object {width: 621, height: 770}
-//获取鼠标相对可视区域的位置
-var ele = document.getElementsByClassName("div2")[0];
-ele.addEventListener("mouseenter",function(){console.log($$.mouseSite());});//Object {x: 58, y: 50}
-//获取鼠标相对页面的位置
-ele.addEventListener("mouseleave",function(){console.log($$.mousePageSite());});//Object {x: 258, y: 258}
-//获取元素的位置坐标
-console.log($$.elementSite(ele));//Object {x: 58, y: 58}
-
-
-/**
  * response
  */
 console.log($$.responseCode(200));//Object {msg: "成功", act: "alert('操作成功')"}
@@ -101,19 +84,45 @@ console.log(new Date(1489559523256).format("yyyy-MM-dd")); // 2017-03-15
 console.log(new Date("Fri Feb 10 2017 02:00:33 GMT+0800 (中国标准时间)").format("yyyy-MM-dd")); // 2017-03-15
 
 /**
- * scrollTop
+ * client
  */
-console.log($$.scroll());
+console.log($$.language);//zh-cn
+console.log($$.isMobile);//false
+console.log($$.isMobileOld);//false
+//获取屏幕可视区域的宽高
+console.log($$.clientVisible());//Object {width: 621, height: 770}
+//获取屏幕分辨率
+console.log($$.client());//Object {width: 1600, height: 900}
+//获取屏幕可用宽高
+console.log($$.clientAvail());//{width: 1600, height: 860}
 
 /**
- * keyevent
+ * scroll 获取页面卷曲部分大小
+ */
+console.log($$.scroll());//Object {left: 221, top: 133}
+
+var ele = document.getElementsByClassName("div2")[0];
+/**
+ * key 获取按键和鼠标
  */
 document.addEventListener("keydown", function(){console.log($$.key())});// 13
 document.addEventListener("mousedown", function(){console.log($$.mouse())});// 0
+//获取鼠标相对可视区域的位置
+ele.addEventListener("mouseenter",function(){console.log($$.mouseSite());});//Object {x: 58, y: 50}
+//获取鼠标相对页面的位置
+ele.addEventListener("mouseleave",function(){console.log($$.mousePageSite());});//Object {x: 258, y: 258}
+
+/**
+ * element
+ */
+//获取元素在整个页面的位置坐标(非可视区域)
+console.log($$.elementSite(ele));//Object {x: 58, y: 58}
+//显示隐藏元素
+$$.hide(ele);
+$$.show(ele);
+//获取元素样式
+console.log($$.getStyle(ele,"width"));//200px
 
 </script>
-
-
-
 </body>
 </html>
